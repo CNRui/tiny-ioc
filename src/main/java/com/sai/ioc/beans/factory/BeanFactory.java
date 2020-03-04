@@ -1,7 +1,7 @@
 package com.sai.ioc.beans.factory;
 
-public interface BeanFactory {
+public interface BeanFactory<T> {
 
-    Object getBean(String name) throws Exception;
+    T getBean(String name) throws Exception;
 
 }
