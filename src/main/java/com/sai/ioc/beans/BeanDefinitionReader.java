@@ -6,5 +6,5 @@ public interface BeanDefinitionReader {
 
     BeanDefinitionRegistry getRegistry();
 
-    void loadBeanDefinition(String location) throws Exception;
+    void loadBeanDefinition() throws Exception;
 }

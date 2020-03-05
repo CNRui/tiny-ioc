@@ -27,8 +27,8 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
     @Override
     protected void refresh() throws Exception {
         ResourceLoader resourceLoader = new UrlResourceLoader(location);
-        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(resourceLoader);
-        xmlBeanDefinitionReader.loadBeanDefinition(location);
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(resourceLoader,new AutowireCapableBeanFactory());
+        xmlBeanDefinitionReader.loadBeanDefinition();
         BeanDefinitionRegistry registry = xmlBeanDefinitionReader.getRegistry();
         for (String beanName : registry.getBeanDefinitionNames()) {
             beanFactory.registerBeanDefinition(beanName, registry.getBeanDefinition(beanName));

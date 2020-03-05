@@ -4,6 +4,7 @@ import com.sai.ioc.beans.AbstractBeanDefinitionReader;
 import com.sai.ioc.beans.BeanDefinition;
 import com.sai.ioc.beans.BeanReference;
 import com.sai.ioc.beans.PropertyValue;
+import com.sai.ioc.beans.factory.BeanDefinitionRegistry;
 import com.sai.ioc.beans.io.ResourceLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -17,12 +18,12 @@ import java.io.InputStream;
 
 public class XmlBeanDefinitionReader extends AbstractBeanDefinitionReader {
 
-    public XmlBeanDefinitionReader(ResourceLoader resourceLoader) {
-        super(resourceLoader);
+    public XmlBeanDefinitionReader(ResourceLoader resourceLoader, BeanDefinitionRegistry registry) {
+        super(resourceLoader, registry);
     }
 
     @Override
-    public void loadBeanDefinition(String location) throws Exception {
+    public void loadBeanDefinition() throws Exception {
         InputStream inputStream = getResourceLoader().getResource().getInputStream();
         doLoadBeanDefinition(inputStream);
     }
