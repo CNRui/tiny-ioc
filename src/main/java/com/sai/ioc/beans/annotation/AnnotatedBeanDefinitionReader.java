@@ -108,7 +108,6 @@ public class AnnotatedBeanDefinitionReader extends AbstractBeanDefinitionReader 
                 if (name.isEmpty()) {
                     name = classSimpleName.substring(0, 1).toLowerCase() + classSimpleName.substring(1);
                 }
-                //TODO:bean properties
                 processProperty(clazz, beanDefinition);
                 getRegistry().registerBeanDefinition(name, beanDefinition);
                 break;
@@ -126,9 +125,6 @@ public class AnnotatedBeanDefinitionReader extends AbstractBeanDefinitionReader 
                     String value = ((Value) annotation).value();
                     if (value.length() > 0) {
                         beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, value));
-                    } else {
-                        throw new IllegalArgumentException("Configuration problem: <property> element for property '"
-                                + name + "' must specify a ref or value");
                     }
                 }
                 if (annotation instanceof Autowired) {
@@ -137,9 +133,6 @@ public class AnnotatedBeanDefinitionReader extends AbstractBeanDefinitionReader 
                     if (ref != null && ref.length() > 0) {
                         BeanReference beanReference = new BeanReference(ref);
                         beanDefinition.getPropertyValues().addPropertyValue(new PropertyValue(name, beanReference));
-                    } else {
-                        throw new IllegalArgumentException("Configuration problem: <property> element for property '"
-                                + name + "' must specify a ref or value");
                     }
                 }
             }
