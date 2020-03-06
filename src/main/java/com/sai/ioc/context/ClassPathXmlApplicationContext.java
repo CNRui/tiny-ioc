@@ -27,12 +27,13 @@ public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
     @Override
     protected void refresh() throws Exception {
         ResourceLoader resourceLoader = new UrlResourceLoader(location);
-        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(resourceLoader,new AutowireCapableBeanFactory());
+        XmlBeanDefinitionReader xmlBeanDefinitionReader = new XmlBeanDefinitionReader(resourceLoader, this.beanFactory);
         xmlBeanDefinitionReader.loadBeanDefinition();
-        BeanDefinitionRegistry registry = xmlBeanDefinitionReader.getRegistry();
-        for (String beanName : registry.getBeanDefinitionNames()) {
-            beanFactory.registerBeanDefinition(beanName, registry.getBeanDefinition(beanName));
-        }
+        //BeanDefinitionReader直接操作 BeanDefinition,它的 getRegistry() 获取的不是内置的 registry,而是 BeanFactory的实例
+//        BeanDefinitionRegistry registry = xmlBeanDefinitionReader.getRegistry();
+//        for (String beanName : registry.getBeanDefinitionNames()) {
+//            beanFactory.registerBeanDefinition(beanName, registry.getBeanDefinition(beanName));
+//        }
 //        for (Map.Entry<String, BeanDefinition> entry : xmlBeanDefinitionReader.getRegistry().entrySet())
 //            beanFactory.registerBeanDefinition(entry.getKey(), entry.getValue());
     }
